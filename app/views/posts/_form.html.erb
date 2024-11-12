@@ -1,0 +1,54 @@
+
+
+<div class="container">
+  <%= form_with(model: post) do |form| %>
+    <% if post.errors.any? %>
+      <div style="color: red">
+        <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+
+        <ul>
+          <% post.errors.each do |error| %>
+            <li><%= error.full_message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+   
+
+
+
+    <div class="mb-3">
+      <%= form.label :title, class: "form-label font-weight-bold", style: "font-size: 1.6rem;" %>
+      <%= form.text_field :title, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :overview, class: "form-label font-weight-bold", style: "font-size: 1.6rem;" %>
+      <%= form.text_field :overview, class: "form-control" %>
+    </div>
+
+      <div class="mb-3">
+      <%= form.label :cover_image, class: "form-label font-weight-bold", style: "font-size: 1.6rem;" %>
+      <%= form.file_field :cover_image, class: "form-control" %>
+    </div>'
+    <div class="mb-3">
+      <%= form.label :body, class: "form-label font-weight-bold", style: "font-size: 1.6rem;" %>
+      <%= form.rich_text_area :body, class: "form-control" %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :status, class: "form-label font-weight-bold", style: "font-size: 1.6rem;" %>
+      <%= form.select :status, Post.statuses.keys.map { |status| [status.titleize, status] }, { class: "form-select" } %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :catagory_id, "Category" , class: "form-label font-weight-bold", style: "font-size: 1.6rem;" %>
+      <%= form.collection_select :catagory_id, Catagory.all, :id, :name, prompt: true %>
+    </div>
+
+    <div>
+      <%= form.submit class: "btn btn-primary px-3 text-center" %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,70 @@
+
+
+<div class = "container">
+    <div class="blog-content mx-auto" style="max-width: 1000px;">
+
+    <div id="<%= dom_id post %>">
+
+      <div class="text-center">
+          <%= post.cover_image.present? ? image_tag(post.cover_image, :size => "1000x350") : image_tag("https://via.placeholder.com/50") %>
+        </div>
+        <div class="badge bg-success-subtle text-success-emphasis mt-3 mb-5 border-bottom border-success rounded border-2 p-2 mb-5">
+          <h2><%= post.title %></h2>
+      </div>
+      <div class="d-flex flex-row mb-4">
+        <%= post.user&.profile_picture&.attached? ? image_tag(post.user.profile_picture, size: "60x50", class: "rounded") : image_tag("avatar.png", size: "60x50", class: "rounded-circle") %>
+
+        <footer class="blockquote-footer ms-2 mt-3">
+          Author(change its links): <cite title="Source Title"><%= link_to "#{post.user.email.split("@")[0].capitalize}", users_path %></cite>
+        </footer>
+      </div>
+      <div class="d-flex flex-row mb-4" style="max-width: 100%;">
+        <div class="d-flex justify-content-start w-100 gap-3">
+          <button type="button" class="btn p-0 border-0 bg-transparent">
+            <%= image_tag("like_button.png", size: "70x50", class: "rounded-circle") %>
+          </button>
+          <button type="button" class="btn p-0 border-0 bg-transparent">
+            <%= image_tag("like_button.png", size: "70x50", class: "rounded-circle") %>
+          </button>
+        </div>
+
+        <div class="d-flex justify-content-end w-100 gap-3">
+          <button type="button" class="btn p-0 border-0 bg-transparent">
+            <%= image_tag("save.png", size: "50x50", class: "rounded-circle") %>
+          </button>
+          <button type="button" class="btn p-0 border-0 bg-transparent">
+            <%= image_tag("share.png", size: "40x35", ) %>
+          </button>
+          <button type="button" class="btn p-0 border-0 bg-transparent">
+            <%= image_tag("more.png", size: "40x35", ) %>
+          </button>
+        </div>
+      </div>
+
+
+
+      <div class="mb-5">
+           <%= styled_rich_text(post.body, image_height: "200px") %>
+        </div>
+
+      </div>
+
+
+      <p>
+        <strong>Status:</strong>
+        <%= post.status %>
+      </p>
+
+      <p>
+        <strong>Category:</strong>
+        <%= post.catagory.name %>
+      </p>
+
+      <p>
+        <strong>Author:</strong>
+        <%= post.user.currentuser%>
+    </div>
+  </div>
+</div>
+
+

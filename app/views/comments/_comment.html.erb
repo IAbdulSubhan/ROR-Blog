@@ -1,0 +1,25 @@
+<div class="comment " id="comment_<%= comment.id %>">
+    <p><%= comment.body %></p>
+    <p><%= time_ago_in_words(comment.created_at) %> ago</p>
+
+<!--not working properly-->
+<!--    <div class="d-flex gap-2">-->
+      <%# if user_signed_in? && (current_user.admin? || @post.user == current_user) %>
+        <%#= link_to 'Edit', edit_post_comment_path(comment), class: 'btn btn-secondary' %>
+        <%#= button_to 'Delete', post_comment_path(comment), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger' %>
+      <%# end %>
+<!--    </div>-->
+
+  <!-- Render replies to this comment (if any) -->
+  <% if comment.children.any? %>
+    <div class="replies">
+      <% comment.children.each do |child_comment| %>
+        <%= render 'comment', comment: child_comment %>
+      <% end %>
+    </div>
+  <% end %>
+
+  <!-- Form to reply to this comment -->
+  <%#link_to "Reply Comment", reply_post_comment_path, comment: comment %>
+  <%= render 'comments/reply_form', comment: comment %>
+</div>

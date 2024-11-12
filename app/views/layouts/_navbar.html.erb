@@ -1,0 +1,93 @@
+<nav class="navbar navbar-expand-lg bg-dark navbar-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="<%= landingpage_path%>">BlogsWorld</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+        <%= link_to "Home", posts_path, class: "nav-link active"%>
+        </li>
+        <%if user_signed_in?%>
+          <li class="nav-item">
+          <%= link_to "New blog", new_post_path, class: "nav-link active"%>
+          </li>
+        <%else%>
+            <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Categories
+          </a>
+          <ul class="dropdown-menu">
+            <% @catagories.each do |catagory| %>
+              <li>
+                <a class="dropdown-item" href="<%= catagory_posts_path(catagory) %>">
+                  <%= catagory.name %>
+                </a>
+              </li>
+            <% end %>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Authors
+          </a>
+          <ul class="dropdown-menu">
+          <% if @non_admin_users.present? %>
+            <% @non_admin_users.each do |user| %>
+              <li>
+                <a class="dropdown-item" href="<%= user_posts_path(user.id) %>">
+                  <%= user.username %>
+                </a>
+              </li>
+            <% end %>
+            <% else %>
+              <li><a class="dropdown-item" href="#">No authors available</a></li>
+            <% end %>
+          </ul>
+        </li>
+
+        <%end%>
+      <%if user_signed_in? && current_user.admin?%>
+          <li class="nav-item">
+          <%= link_to "View Users", users_path, class: "nav-link active"%>
+          </li>
+      <%end%>
+
+
+        
+
+      </ul>
+<!--      <form class="d-flex" role="search">-->
+<!--        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">-->
+<!--        <button class="btn btn-outline-success" type="submit">Search</button>-->
+<!--      </form>-->
+      <% unless current_page?(search_path) %>
+        <%= button_to 'Search', search_path, method: :get, class: 'btn btn-outline-success' %>
+      <% end %>
+
+      <%#= search_form_for @query, url: posts_path, method: :get, class: "d-flex" do |form| %>
+        <%#= form.search_field :title_or_overview_or_i_cont_any, class: "form-control me-2", placeholder: "Search", aria: { label: "Search" } %>
+        <%#= form.submit "Search", class: "btn btn-outline-success" %>
+      <%# end %>
+
+
+      <%if user_signed_in?%>
+        <%= form_with url: destroy_user_session_path, method: :delete, class: "mx-2 d-inline-block" do %>
+        <%= submit_tag "Logout", class: "btn btn-outline-success" %>
+        2<% end %>
+
+      <%else%>
+        <li class="nav-item">
+        <%= link_to "Sign Up", new_user_registration_path, class: "btn btn-outline-success"%>
+        </li>
+        <li class="nav-item">
+          <%= link_to "Login", user_session_path	, class: "btn btn-outline-success"%>
+        </li>
+      <%end%>
+
+      
+    </div>
+  </div>
+</nav>

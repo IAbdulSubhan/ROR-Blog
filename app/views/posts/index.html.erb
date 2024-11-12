@@ -1,0 +1,55 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-5 mb-4 border-bottom shadow-sm text-center m-5 ">
+      <!-- SVG Icon -->
+      <div class="d-flex justify-content-around mt-3">
+        <a href="#" target="_blank" class="btn btn-link ">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="32" height="32">
+            <path d="M12.75 7a.75.75 0 0 0-1.5 0v4.25H7a.75.75 0 0 0 0 1.5h4.25V17a.75.75 0 0 0 1.5 0v-4.25H17a.75.75 0 0 0 0-1.5h-4.25V7Z"></path>
+            <path d="M3.75 2A1.75 1.75 0 0 0 2 3.75v16.5c0 .966.784 1.75 1.75 1.75h16.5A1.75 1.75 0 0 0 22 20.25V3.75A1.75 1.75 0 0 0 20.25 2H3.75ZM3.5 3.75a.25.25 0 0 1 .25-.25h16.5a.25.25 0 0 1 .25.25v16.5a.25.25 0 0 1-.25.25H3.75a.25.25 0 0 1-.25-.25V3.75Z"></path>
+          </svg>
+        </a>
+        <!-- Links as Buttons -->
+        <%= link_to 'For you', '#', class: 'btn btn-link text-black', style: "font-size: 20px" %>
+        <%= link_to 'Following', '#', class: 'btn btn-link text-black', style: "font-size: 20px" %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container">
+  <div class="row">
+    <% @posts.each do |post| %>
+      <div class="col-md-9 mb-4">
+        <div class="d-flex align-items-center p-3 shadow-sm" style="border: none;">
+
+          <div class="flex-grow-1">
+            <div class="d-flex flex-row mb-2">
+              <%= post.user&.profile_picture&.attached? ? image_tag(post.user.profile_picture, size: "60x50", class: "rounded") : image_tag("avatar.png", size: "60x50", class: "rounded-circle") %>
+
+              <footer class="blockquote-footer ms-2 mt-3">
+                Author(change its links): <cite title="Source Title"><%= link_to "#{post.user.email.split("@")[0].capitalize}", users_path %></cite>
+              </footer>
+            </div>
+            <!-- Blog Text -->
+
+            <h5 class="mb-2 font-weight-bold"><%= post.title %></h5>
+            <p class="mb-2 text-muted"><%= truncate(post.overview, length: 150) %></p>
+
+            <%= link_to "Read Blog", post_path(post), class: "btn btn-primary mb-2 mt-3 item justify-content-end" %>
+            <br>
+
+
+          </div>
+
+          <!-- Blog Cover Image -->
+          <div class="ml-3">
+            <%= post.cover_image.attached? ? image_tag(post.cover_image, size: "250x150") : image_tag("https://via.placeholder.com/50", size: "250x150") %>
+
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

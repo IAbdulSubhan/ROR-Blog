@@ -1,0 +1,17 @@
+<div class="col-sm-4 mb-4">
+  <div class="card">
+    <div class="card-body">
+      <h5 class="card-header"><%= post.title %></h5>
+      <p class="card-text"><%= post.overview %></p>
+      
+      <footer class="blockquote-footer">
+        Author: <cite title="Source Title"><%= post.user.email.split("@")[0].capitalize %></cite>
+      </footer>
+
+      <%= link_to "Collapse Overview", posts_path, 
+                  data: { turbo_frame: "post_frame_#{post.id}" }, 
+                  class: "btn btn-secondary" %>
+      <%= link_to "Read Blog", post_path(post), class: "btn btn-primary" %>
+    </div>
+  </div>
+</div>
