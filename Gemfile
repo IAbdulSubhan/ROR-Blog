@@ -7,6 +7,8 @@ gem 'pagy'
 gem "devise"
 
 gem "ransack"
+gem 'stripe'
+
 
 # parses rich text content and help to customize that content
 gem 'nokogiri'

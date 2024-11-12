@@ -8,6 +8,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   before_destroy :ensure_not_admin
+  belongs_to :subscription, optional: true
   class Error < StandardError
   end
 

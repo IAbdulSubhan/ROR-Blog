@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+
+  # config/routes.rb
+  resources :subscriptions, only: [:new, :create] do
+    post 'pause', on: :member
+    post 'resume', on: :member
+  end
+
   get 'search', to: 'search#index'
   devise_for :users
   resources :catagories
