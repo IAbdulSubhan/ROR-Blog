@@ -23,5 +23,6 @@ module Blog
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.active_job.queue_adapter = :sidekiq      #Rails ab background jobs ko Sidekiq ke through handle karega.
   end
 end

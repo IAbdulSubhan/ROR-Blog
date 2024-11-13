@@ -1,4 +1,26 @@
-<!--<h1>Search#index</h1>-->
-<!--<p>Find me in app/views/search/index.html.erb</p>-->
+<!-- app/views/search/index.html.erb -->
+<h1 class="text-center my-4">
+  <span class="bg-info text-white p-3">Search Results</span>
+</h1>
+<!-- Display the count of results with Bootstrap styling -->
+<h3 class="text-center  mb-4">Found <%= @posts.count %> result(s)</h3>
 
-<%=render "search/form" %>
+<!-- Search Form -->
+<%= render "search/form" %>
+
+<% if @posts.present? %>
+  <!-- Posts List with Bootstrap styling -->
+  <div class="list-group">
+    <% @posts.each do |post| %>
+      <div class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <h5 class="mb-1"><%= post.title %></h5>
+          <p class="mb-1"><%= post.overview %></p>
+        </div>
+        <a href="<%= post_path(post) %>" class="btn btn-primary btn-sm">View Post</a> <!-- Add link to show the post -->
+      </div>
+    <% end %>
+  </div>
+<% else %>
+  <p class="text-center text-muted">No results found.</p>
+<% end %>

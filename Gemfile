@@ -9,6 +9,9 @@ gem "devise"
 gem "ransack"
 gem 'stripe'
 
+gem 'sidekiq', '~> 7.0'
+
+
 
 # parses rich text content and help to customize that content
 gem 'nokogiri'

@@ -1,4 +1,9 @@
+# require 'sidekiq/web'
 Rails.application.routes.draw do
+
+  # mount Sidekiq::Web => "/sidekiq" # mount Sidekiq::Web in your Rails app
+
+  get 'search', to: 'search#index'
 
   # config/routes.rb
   resources :subscriptions, only: [:new, :create] do
@@ -6,7 +11,6 @@ Rails.application.routes.draw do
     post 'resume', on: :member
   end
 
-  get 'search', to: 'search#index'
   devise_for :users
   resources :catagories
   resources :posts
@@ -43,6 +47,8 @@ Rails.application.routes.draw do
       get :expand_overview
     end
   end
-  
+
+
+
 
 end

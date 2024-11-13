@@ -62,6 +62,8 @@ class PostsController < ApplicationController
         @pagy, @posts = pagy(Post.all, items: 3) # Default to 3 items for guests
       end
     end
+    TestJob.perform_later("Hello from Sidekiq!")
+
   end
   
   def expand_overview
